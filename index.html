@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.2em;
+        }
+
+        .adaylar {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .aday {
+            width: 45vw;
+        }
+
+        .aday img {
+            width: 30vw;
+            height: 42vw;
+            border-radius: 10%;
+        }
+
+        .arti {
+            width: 30vw;
+            height: 30vw;
+            border-radius: 50%;
+            background-color: green;
+            color: white;
+            font-size: xx-large;
+        }
+
+        .eksi {
+            width: 12vw;
+            height: 12vw;
+            border-radius: 50%;
+            background-color: red;
+            color: white;
+            font-size: x-large;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cumhurbaşkanlığı Seçimi - Çetele</h1>
+    <p>
+        İl/İlçe: <input type="text" id="ilce" />
+    </p>
+    <p>
+        Sandık No: <input type="text" id="sandikno" />
+    </p>
+    <div class="adaylar">
+        <div class="aday rte">
+            <img src="/rte.jpg" />
+            <h2>
+                Recep Tayyip Erdoğan: <span class="sayac">0</span>
+            </h2>
+            <p><button class="arti" data-aday="rte">+</button></p>
+            <p><button class="eksi" data-aday="rte">-</button></p>
+        </div>
+        <div class="aday kk">
+            <img src="/kk.jpg" />
+            <h2>
+                Kemal Kılıçdaroğlu: <span class="sayac">0</span>
+            </h2>
+            <p><button class="arti" data-aday="kk">+</button></p>
+            <p><button class="eksi" data-aday="kk">-</button></p>
+        </div>
+    </div>
+    <script lang="text/javascript">
+        let oylar = { rte: 0, kk: 0 };
+        document.querySelectorAll(".arti").forEach(elem => {
+            let aday = elem.dataset.aday;
+            elem.addEventListener("click", evt => {
+                oylar[aday]++;
+                document.querySelector(`.${aday} .sayac`).innerText = oylar[aday];
+            });
+        });
+        document.querySelectorAll(".eksi").forEach(elem => {
+            let aday = elem.dataset.aday;
+            elem.addEventListener("click", evt => {
+                if(oylar[aday] > 0) oylar[aday]--;
+                document.querySelector(`.${aday} .sayac`).innerText = oylar[aday];
+            });
+        });
+    </script>
+</body>
+</html>
