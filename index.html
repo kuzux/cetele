@@ -30,6 +30,23 @@
             border-radius: 10%;
         }
 
+        .gecersiz .arti {
+            background-color: darkgrey;
+            color: white;
+            width: 8vw;
+            height: 8vw;
+            border-radius: 50%;
+            font-size: small;
+        }
+        .gecersiz .eksi {
+            background-color: darkgrey;
+            color: white;
+            width: 8vw;
+            height: 8vw;
+            border-radius: 50%;
+            font-size: small;
+        }
+
         .arti {
             width: 30vw;
             height: 30vw;
@@ -75,13 +92,22 @@
             <p><button class="eksi" data-aday="kk">-</button></p>
         </div>
     </div>
+    <p class="gecersiz">
+        Geçersiz Oy: <span class="sayac">0</span>
+        <button class="arti" data-aday="gecersiz">+</button>
+        <button class="eksi" data-aday="gecersiz">-</button>
+    </p>
+    <p class="gecerli">
+        Toplam Geçerli Oy: <span class="sayac">0</span>
+    </p>
     <script lang="text/javascript">
-        let oylar = { rte: 0, kk: 0 };
+        let oylar = { rte: 0, kk: 0, gecersiz: 0 };
         document.querySelectorAll(".arti").forEach(elem => {
             let aday = elem.dataset.aday;
             elem.addEventListener("click", evt => {
                 oylar[aday]++;
                 document.querySelector(`.${aday} .sayac`).innerText = oylar[aday];
+                document.querySelector(".gecerli .sayac").innerText = oylar.kk + oylar.rte;
             });
         });
         document.querySelectorAll(".eksi").forEach(elem => {
@@ -89,6 +115,7 @@
             elem.addEventListener("click", evt => {
                 if(oylar[aday] > 0) oylar[aday]--;
                 document.querySelector(`.${aday} .sayac`).innerText = oylar[aday];
+                document.querySelector(".gecerli .sayac").innerText = oylar.kk + oylar.rte;
             });
         });
     </script>
